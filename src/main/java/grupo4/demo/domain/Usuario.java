@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class Usuario {
-    public String usuario;
-    public String contraseña;
+    private String usuario;
+    private String clave;
+    private boolean habilitado;
 }
