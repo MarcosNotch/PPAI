@@ -6,5 +6,25 @@
 </head>
 <body>
     <p th:text="${mensaje}"></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="usuario: ${usuarios}">
+<!--                <td th:text="${usuario.usuario}"></td>-->
+<!--                <td th:text="${usuario.contraseña}"></td> -->
+
+                <td th:text="${usuario.getUsuario()}"></td>
+                <td th:text="${usuario.getContraseña()}"></td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>
+
