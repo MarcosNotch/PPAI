@@ -3,6 +3,7 @@ package grupo4.demo.domain;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
