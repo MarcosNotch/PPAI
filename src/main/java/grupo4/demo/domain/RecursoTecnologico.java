@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class RecursoTecnologico {
 
     private int numeroRt;
-    private TipoRecursoTecnologico tipoDeRT;
-    private Modelo modeloDelRT;
+//    private TipoRecursoTecnologico tipoDeRT;
+//    private Modelo modeloDelRT;
     private ArrayList<CambioEstadoRT> cambioEstadoRT;
     private ArrayList<Turno> turnos;
 

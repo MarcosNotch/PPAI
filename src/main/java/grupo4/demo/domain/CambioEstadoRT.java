@@ -1,6 +1,4 @@
 package grupo4.demo.domain;
-
-
 import lombok.Data;
 
 import java.util.Date;
@@ -17,7 +15,11 @@ public class CambioEstadoRT {
     private Estado estado;
 
     public CambioEstadoRT(){}
-    public Estado getActual(){}
+    public Estado getActual(){
+        Estado estado = new Estado();
+        // .. código
+        return estado;
+    }
 
 
     
