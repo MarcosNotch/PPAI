@@ -17,11 +17,21 @@ public class CambioEstadoTurno {
     private Estado estado;
 
     public CambioEstadoTurno(){}
-    public Boolean misTurnos(){}
-    public Boolean estaConfirmadoOPendienteConfirmacion(){}
-    public Estado getActual(){}
-    public Boolean esConfirmado(){}
-    public Boolean esPendienteDeConfirmacion(){}
+    public Boolean misTurnos(){
+        return false;
+    }
+    public Boolean estaConfirmadoOPendienteConfirmacion(){
+        return false;
+    }
+    public Estado getActual(){
+        return estado;
+    }
+    public Boolean esConfirmado(){
+        return false;
+    }
+    public Boolean esPendienteDeConfirmacion(){
+        return false;
+    }
 
     
 }
