@@ -1,106 +1,116 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}" />
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}" />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-</head>
-<body>
-    <div class="app">
-        <div class="menu-toggle">
-            <div class="hamburger">
-                <span></span>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+            $( "#input-fecha-prevista" ).datepicker({
+                    dateFormat: "dd/mm/yy"
+                    });
+            } );
+        </script>
+    </head>
+    <body>
+        <div class="app">
+            <div class="menu-toggle">
+                <div class="hamburger">
+                    <span></span>
+                </div>
             </div>
-        </div>
 
-        <aside class="sidebar">
-            <h3>Menu</h3>
+            <aside class="sidebar">
+                <h3>Menu</h3>
 
-            <nav class="menu">
-                <a th:href="@{reg-ingreso}" id="home" class="menu-item" >Registrar ingreso de RT en mantenimiento correctivo</a>
-            </nav>
-        </aside>
+                <nav class="menu">
+                    <a th:href="@{reg-ingreso}" id="home" class="menu-item" >Registrar ingreso de RT en mantenimiento correctivo</a>
+                </nav>
+            </aside>
 
-        <main class="content">
-            <h1 th:if="${cuVisible} == true">Registrar ingreso de RT en mantenimiento correctivo</h1>
+            <main class="content">
+                <h1 th:if="${cuVisible} == true">Registrar ingreso de RT en mantenimiento correctivo</h1>
 
-            <p th:if="${cuVisible}" class="paragraph">Seleccione un recurso tecnológico</p>
-            <div class="panel-body table-responsive">
-                <table th:if="${cuVisible} == true" class = "table table-hover ">
+                <p th:if="${cuVisible}" class="paragraph">Seleccione un recurso tecnológico</p>
+                <div class="panel-body table-responsive">
+                    <table th:if="${cuVisible} == true" class = "table table-hover ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tipo de recurso</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Modelo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="fila: ${datosRecursos}" onclick="clickTablaRT(this);" style="cursor: pointer;">
+                                <td th:text="${fila[0]}"></td>
+                                <td th:text="${fila[1]}"></td>
+                                <td th:text="${fila[2]}"></td>
+                                <td th:text="${fila[3]}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            
+                <p th:if="${cuVisible} == true">Ingrese la fecha de fin de inhabilitación prevista</p>
+                <input th:if="${cuVisible} == true" readonly type="text" id="input-fecha-prevista" onchange="clickFechaPrevista(value)" defaultValue="">
+            
+                <p th:if="${cuVisible} == true">Ingrese el motivo de ingreso en mantenimiento</p>
+                <textarea th:if="${cuVisible} == true" id="input-razon-mantenimiento" rows="2" onfocusout="focusOutRazonMantenimiento(value)" text="${inputDefaultValue}"></textarea>
+            
+                <p th:if="${cuVisible} == true">Turnos del recurso seleccionado</p>
+                <table th:if="${cuVisible} == true" class = "table">
                     <thead>
                         <tr>
-                            <th scope="col">Tipo de recurso</th>
-                            <th scope="col">Número</th>
-                            <th scope="col">Marca</th>
-                            <th scope="col">Modelo</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Científico</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="fila: ${datosRecursos}" onclick="clickTablaRT(this);" style="cursor: pointer;">
-                            <td th:text="${fila[0]}"></td>
-                            <td th:text="${fila[1]}"></td>
-                            <td th:text="${fila[2]}"></td>
-                            <td th:text="${fila[3]}"></td>
-                        </tr>
+                    <!--            <tr th:each="usuario: ${usuarios}">-->
+                    <!--                <td th:text="${usuario.usuario}"></td>-->
+                    <!--                <td th:text="${usuario.clave}"></td>-->
+                    <!--            </tr>-->
                     </tbody>
                 </table>
-            </div>
-        
-            <p th:if="${cuVisible} == true">Ingrese la fecha de fin de inhabilitación prevista</p>
-            <input th:if="${cuVisible} == true" type="datetime-local">
-        
-            <p th:if="${cuVisible} == true">Ingrese el motivo de ingreso en mantenimiento</p>
-            <input th:if="${cuVisible} == true" type="text">
-        
-            <p th:if="${cuVisible} == true">Turnos del recurso seleccionado</p>
-            <table th:if="${cuVisible} == true" class = "table">
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Científico</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <!--            <tr th:each="usuario: ${usuarios}">-->
-                <!--                <td th:text="${usuario.usuario}"></td>-->
-                <!--                <td th:text="${usuario.clave}"></td>-->
-                <!--            </tr>-->
-                </tbody>
-            </table>
-        
-            <div th:if="${cuVisible} == true">
-                <button
-                    type="button"
-                    class="btn btn-secondary dropdown-toggle"
-                    id="simpleDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Opciones de Notificación
-                </button>
-        
-                <ul class="dropdown-menu">
-                    <li><a href="#" class="dropdown-item">Opción 1</a></li>
-                    <li><a href="#" class="dropdown-item">Opción 2</a></li>
-                    <li><a href="#" class="dropdown-item">Opción 3</a></li>
-                </ul>
-            </div>
-        
-            <button th:if="${cuVisible} == true">Confirmar ingreso</button>
-        </main>
-    </div>
+            
+                <div th:if="${cuVisible} == true">
+                    <button
+                        type="button"
+                        class="btn btn-secondary dropdown-toggle"
+                        id="simpleDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Opciones de Notificación
+                    </button>
+            
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="dropdown-item">Opción 1</a></li>
+                        <li><a href="#" class="dropdown-item">Opción 2</a></li>
+                        <li><a href="#" class="dropdown-item">Opción 3</a></li>
+                    </ul>
+                </div>
+            
+                <button th:if="${cuVisible} == true">Confirmar ingreso</button>
+            </main>
+        </div>
 
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous">
-    </script>
+        <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous">
+        </script>
 
-    <script type="text/javascript" th:src="@{/src/index.js}"></script>
-</body>
+        <script type="text/javascript" th:src="@{/src/index.js}"></script>
+    </body>
 </html>
 
