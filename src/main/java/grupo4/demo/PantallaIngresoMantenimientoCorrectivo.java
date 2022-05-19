@@ -1,4 +1,8 @@
 package grupo4.demo;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,8 @@ public class PantallaIngresoMantenimientoCorrectivo {
 
     private boolean cuVisible = false; 
     private GestorMantenimiento gestorMantenimiento;
+    private LocalDate fechaPrevista = null;
+    private String razonMantenimiento = null;
 
     @GetMapping("/")
     public String iniciar(Model model){
@@ -25,8 +31,7 @@ public class PantallaIngresoMantenimientoCorrectivo {
 
         // Pedir al gestor que busque los RT disponibles para el usuario logueado
         // Se le pasa al gestor el puntero de la pantalla y del objecto Model
-        gestorMantenimiento.buscarRTParaUsrLogueado(this, model);
-
+        gestorMantenimiento.opcionReingresoRTMantCorrectivo(this, model);
         return "index";
     }
 
@@ -34,6 +39,7 @@ public class PantallaIngresoMantenimientoCorrectivo {
     {
         // Hacer visible los elementos necesarios para el CU
         cuVisible = true;
+        model.addAttribute("inputDefaultValue", "");
         model.addAttribute("cuVisible", cuVisible);
     }
 
@@ -49,15 +55,16 @@ public class PantallaIngresoMantenimientoCorrectivo {
         //};
 
         model.addAttribute("datosRecursos", datosRecursos);
-        solicitarSeleccionDeRT(); // No le encontré utilidad a este método
+        solicitarSeleccionDeRT();
     }
 
     public void solicitarSeleccionDeRT()
     {
-        // ??
+        // No le encontré utilidad por el momento 
+        // Dijo el profe que la deje vacía
     }
 
-    @PostMapping("/reg-ingreso/seleccion-rt")
+    @PostMapping("/reg-ingreso/tomar-seleccion-de-rt")
     public String tomarSeleccionDeRT(Model model, @RequestBody int index)
     {
         // Recibir el índice de la fila seleccionada y enviarla al gestor
@@ -70,9 +77,25 @@ public class PantallaIngresoMantenimientoCorrectivo {
 
     }
 
-    public void tomarDatosInhabilitacionRT()
-    {
+    @PostMapping("/reg-ingreso/tomar-fecha-prevista")
+    public String tomarFechaPrevista(Model model, @RequestBody String fechaPrevistaString){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+        fechaPrevista = LocalDate.parse(fechaPrevistaString, formatter);
 
+        if(razonMantenimiento != null){
+            gestorMantenimiento.tomarDatosInhabilitacionRT(fechaPrevista, razonMantenimiento);
+        }
+
+        return "index";
+    }
+
+    @PostMapping("/reg-ingreso/tomar-razon-mantenimiento")
+    public String tomarRazonMantenimientoCorrectivo(Model model, @RequestBody String razonMantenimiento){
+        if(fechaPrevista != null){
+            gestorMantenimiento.tomarDatosInhabilitacionRT(fechaPrevista, razonMantenimiento);
+        }
+
+        return "index";
     }
 
     public void mostrarTurnos()

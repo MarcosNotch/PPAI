@@ -11,9 +11,9 @@ public class AsignacionResponsableTecnicoRT {
     private ArrayList<RecursoTecnologico> recursos;
     private PersonalCientifico personalCientifico;
 
-    public boolean esDeUsuario(String nombreUsuario)
+    public boolean esDeUsuario(Usuario usuario)
     {
-        return false;
+        return personalCientifico.esDeUsuario();
     }
 
     public boolean esDeCI(String nombreCI)
