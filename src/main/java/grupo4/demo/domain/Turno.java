@@ -3,6 +3,7 @@ package grupo4.demo.domain;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -13,7 +14,25 @@ import java.util.Date;
 public class Turno {
 
     private Date fechaHoraInicio;
-    private Date fechaHoraInicio;
-    private CambioEstadoTurno cambioEstadoTurno;
+    private Date fechaHoraFin;
+    private ArrayList<CambioEstadoTurno> cambioEstadoTurno;
+
+    public Boolean estaDisponibleEnFecha(){
+        return false;
+    }
+
+    public Boolean estaConfirmadoOPendienteConfirmacion(){
+        return false;
+    }
+
+    public void mostrarCientificoDelCL(){
+
+    }
+
+    public void actualizarEstadoTurno(){
+
+    }
+
+
 
 }

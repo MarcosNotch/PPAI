@@ -1,24 +1,34 @@
 package grupo4.demo.domain;
-
-
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
-
-
-// La anotacion de Data de Lombok internamente crea los Get y los Set y el constructor
-// de esta forma podemos dejar un codigo mas limpio y prolijo
 
 @Data
 public class AsignacionResponsableTecnicoRT {
-
     private Date fechaDesde;
     private Date fechaHasta;
-    private RecursosTecnologicos recurso;
+    private ArrayList<RecursoTecnologico> recursos;
     private PersonalCientifico personalCientifico;
 
-    public AsignacionResponsableTecnicoRT(){}
-    public bool esDeUsuario(){}
-    public bool esDeCI(){}
-    public List<RecursosTecnologicos> getRecursosTecnologicosDisponibles(){}
+    public boolean esDeUsuario(String nombreUsuario)
+    {
+        return false;
+    }
+
+    public boolean esDeCI(String nombreCI)
+    {
+        // Valida si PersonalCientifico es del CI
+        // No sé si hace falta para el CU
+        return false;
+    }
+
+    public ArrayList<RecursoTecnologico> getRecursosTecnologicosDisponibles()
+    {
+        ArrayList<RecursoTecnologico> recursos = new ArrayList<>();
+
+        // codigo...
+
+        return recursos;
+    }
 }
