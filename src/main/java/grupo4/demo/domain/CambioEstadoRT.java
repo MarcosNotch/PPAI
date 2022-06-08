@@ -1,6 +1,4 @@
 package grupo4.demo.domain;
-
-
 import lombok.Data;
 
 import java.util.Date;
