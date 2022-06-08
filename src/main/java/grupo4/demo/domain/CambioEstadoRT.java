@@ -12,12 +12,27 @@ import java.util.Date;
 @Data
 public class CambioEstadoRT {
 
-    private Date fechaHoraDesde;
-    private Date fechaHoraHasta;
-    private Estado estado;
+    private Date _fechaHoraDesde;
+    private Date _fechaHoraHasta;
+    private Estado _estado;
 
-    public CambioEstadoRT(){}
-    public Estado getActual(){}
+    public CambioEstadoRT(Date fechaHoraDesde,Date fechaHoraHasta, Estado estado){
+        _fechaHoraDesde = fechaHoraDesde;
+        _fechaHoraHasta = fechaHoraHasta;
+        _estado = estado
+    }
+    public Boolean esActual(){
+        if (_estado.getNombre == 'Actual' ){
+            return true
+        }
+        return false
+    }
+    public Boolean esDisponible(){
+        if (_estado.getNombre == 'Disponible' ){
+            return true
+        }
+        return false
+    }
 
 
     
