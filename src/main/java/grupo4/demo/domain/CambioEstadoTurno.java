@@ -12,26 +12,37 @@ import java.util.Date;
 @Data
 public class CambioEstadoTurno {
 
-    private Date fechaHoraDesde;
-    private Date fechaHoraHasta;
-    private Estado estado;
+    private Date _fechaHoraDesde;
+    private Date _fechaHoraHasta;
+    private Estado _estado;
 
-    public CambioEstadoTurno(){}
-    public Boolean misTurnos(){
-        return false;
+    public CambioEstadoTurno(){
+        _fechaHoraDesde = fechaHoraDesde;
+        _fechaHoraHasta = fechaHoraHasta;
+        _estado = estado
     }
-    public Boolean estaConfirmadoOPendienteConfirmacion(){
-        return false;
+    public Boolean esActual(){
+        if (_estado.getNombre == 'Actual' ){
+            return true
+        }
+        return false
     }
-    public Estado getActual(){
-        return estado;
+    public Estado misTurnos(){
+        return _estado
+    }
+    public Boolean esDisponible(){
+        if (_estado.getNombre == 'Disponible' ){
+            return trueo
+        }
+        return false
     }
     public Boolean esConfirmado(){
-        return false;
+        if (_estado.getNombre == 'Confirmado' ){
+            return true
+        }
+        return false
     }
-    public Boolean esPendienteDeConfirmacion(){
-        return false;
-    }
+
 
     
 }
