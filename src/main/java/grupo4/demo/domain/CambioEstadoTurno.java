@@ -1,9 +1,7 @@
 package grupo4.demo.domain;
-
+import java.time.LocalDateTime;
 
 import lombok.Data;
-
-import java.util.Date;
 
 
 // La anotacion de Data de Lombok internamente crea los Get y los Set y el constructor
@@ -12,35 +10,37 @@ import java.util.Date;
 @Data
 public class CambioEstadoTurno {
 
-    private Date _fechaHoraDesde;
-    private Date _fechaHoraHasta;
-    private Estado _estado;
+    private LocalDateTime fechaHoraDesde;
+    private LocalDateTime fechaHoraHasta;
+    private Estado estado;
 
-    public CambioEstadoTurno(){
-        _fechaHoraDesde = fechaHoraDesde;
-        _fechaHoraHasta = fechaHoraHasta;
-        _estado = estado
+    public CambioEstadoTurno(){}
+
+    public CambioEstadoTurno(LocalDateTime fechaHoraDesde, LocalDateTime fechaHoraHasta, Estado estado){
+        this.fechaHoraDesde = fechaHoraDesde;
+        this.fechaHoraHasta = fechaHoraHasta;
+        this.estado = estado;
     }
     public Boolean esActual(){
-        if (_estado.getNombre == 'Actual' ){
-            return true
+        if (estado.getNombre() == "Actual" ){
+            return true;
         }
-        return false
+        return false;
     }
     public Estado misTurnos(){
-        return _estado
+        return estado;
     }
     public Boolean esDisponible(){
-        if (_estado.getNombre == 'Disponible' ){
-            return trueo
+        if (estado.getNombre() == "Disponible" ){
+            return true;
         }
-        return false
+        return false;
     }
     public Boolean esConfirmado(){
-        if (_estado.getNombre == 'Confirmado' ){
-            return true
+        if (estado.getNombre() == "Confirmado" ){
+            return true;
         }
-        return false
+        return false;
     }
 
 

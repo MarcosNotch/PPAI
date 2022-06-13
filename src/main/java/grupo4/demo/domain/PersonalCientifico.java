@@ -8,6 +8,7 @@ public class PersonalCientifico {
     private String nombre;
     private String apellido;
     private Usuario usuario;
+    private String correoElectronicoInstitucional;
 
     public boolean esDeUsuario()
     {

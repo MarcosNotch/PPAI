@@ -1,14 +1,15 @@
 package grupo4.demo.domain;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 @Data
 public class AsignacionResponsableTecnicoRT {
-    private Date fechaDesde;
-    private Date fechaHasta;
-    private ArrayList<RecursoTecnologico> recursos;
+    private LocalDate fechaDesde;
+    private LocalDate fechaHasta;
+    private List<RecursoTecnologico> recursosTecnologicos;
     private PersonalCientifico personalCientifico;
 
     public boolean esDeUsuario(Usuario usuario)
@@ -23,11 +24,15 @@ public class AsignacionResponsableTecnicoRT {
         return false;
     }
 
-    public ArrayList<RecursoTecnologico> getRecursosTecnologicosDisponibles()
+    public List<RecursoTecnologico> getRecursosTecnologicosDisponibles()
     {
-        ArrayList<RecursoTecnologico> recursos = new ArrayList<>();
+        List<RecursoTecnologico> recursos = new ArrayList<>();
 
-        // codigo...
+        for(RecursoTecnologico recurso : recursosTecnologicos){
+            if(recurso.estaDisponible()){
+                recursos.add(recurso);
+            }
+        }
 
         return recursos;
     }

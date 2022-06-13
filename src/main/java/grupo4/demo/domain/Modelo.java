@@ -15,7 +15,7 @@ public class Modelo {
     private String nombre;
 
     public Modelo(){}
-    public bool esDeMarca(){}
+    // public Boolean esDeMarca(){}
 
     
 }
